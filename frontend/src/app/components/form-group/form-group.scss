@@ -1,0 +1,146 @@
+// Material UI-style form group component
+.form-group {
+  margin-bottom: 24px;
+
+  // Floating label input wrapper
+  .input-wrapper {
+    position: relative;
+    box-shadow: 0px -1px 0px 0px rgba(16, 33, 38, .2) inset, 0px 1px 0px 0px rgba(16, 33, 38, .1);
+    border-radius: 4px;
+    border: 1px solid lightgrey;
+
+    input[type='text'],
+    input[type='email'],
+    input[type='tel'],
+    input[type='number'],
+    input[type='password'],
+    select {
+      width: 100%;
+      padding: 16px 12px 8px 12px;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 0;
+      background-color: rgba(0, 0, 0, 0.02);
+      font-size: 16px;
+      font-family: inherit;
+      line-height: 1.5;
+      color: #333;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-sizing: border-box;
+
+      &:focus {
+        outline: none;
+        background-color: rgba(0, 0, 0, 0.04);
+        border-bottom-color: #1976d2;
+        box-shadow: 0 1px 0 0 #1976d2;
+      }
+
+      &.invalid {
+        border-bottom-color: #d32f2f;
+
+        &:focus {
+          border-bottom-color: #d32f2f;
+          box-shadow: 0 1px 0 0 #d32f2f;
+        }
+      }
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    // Floating label
+    .floating-label {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 16px;
+      font-weight: 400;
+      pointer-events: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: left top;
+      background-color: transparent;
+
+      .required-asterisk {
+        color: #d32f2f;
+      }
+    }
+
+    // Float label when focused or has value
+    &.is-focused,
+    &.has-value {
+      .floating-label {
+        top: 4px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.6);
+        transform: scale(0.85);
+      }
+    }
+
+    // Blue label when focused
+    &.is-focused {
+      .floating-label {
+        color: #1976d2;
+      }
+    }
+
+    // Red label when invalid
+    &.has-value {
+      input.invalid ~ .floating-label,
+      select.invalid ~ .floating-label {
+        color: #d32f2f;
+      }
+    }
+  }
+
+  // Checkbox styling
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 0;
+
+    input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #1976d2;
+    }
+
+    .checkbox-label {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+}
+
+// Error message
+.error-message {
+  display: block;
+  margin-top: 4px;
+  margin-left: 12px;
+  color: #d32f2f;
+  font-size: 12px;
+  font-weight: 400;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

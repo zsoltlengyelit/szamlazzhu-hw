@@ -1,5 +1,5 @@
-<div class="user-list-container">
-  <div class="header">
+<div class="container wide">
+  <div class="header with-actions">
     <h1>Felhasználók</h1>
     <app-button
       label="Létrehozás"
@@ -20,7 +20,7 @@
 
   @if (!loading && users.length > 0) {
     <div class="table-container">
-      <table class="user-table">
+      <table class="data-table">
         <thead>
           <tr>
             <th>Név</th>

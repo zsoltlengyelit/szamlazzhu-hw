@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Job, JOB_LABELS, CreateUserDto } from '../../models/user.model';
 import { ButtonComponent } from '../../components/button/button.component';
+import { FormGroupComponent, SelectOption } from '../../components/form-group/form-group';
 
 @Component({
   selector: 'app-user-create',
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, FormGroupComponent],
   templateUrl: './user-create.component.html',
-  styleUrl: './user-create.component.scss'
 })
 export class UserCreateComponent {
   userForm: FormGroup;
-  jobs = Object.values(Job);
-  jobLabels = JOB_LABELS;
+  jobOptions: SelectOption[];
   submitting: boolean = false;
 
   constructor(
@@ -30,6 +29,11 @@ export class UserCreateComponent {
       telephone: ['', [Validators.maxLength(128)]],
       job: [Job.KERTESZ, Validators.required]
     });
+
+    this.jobOptions = Object.values(Job).map(job => ({
+      value: job,
+      label: JOB_LABELS[job]
+    }));
   }
 
   onSubmit(): void {
@@ -69,27 +73,7 @@ export class UserCreateComponent {
     this.router.navigate(['/users']);
   }
 
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.userForm.get(fieldName);
-    return !!(field && field.invalid && field.touched);
-  }
-
-  getFieldError(fieldName: string): string {
-    const field = this.userForm.get(fieldName);
-    if (!field || !field.errors || !field.touched) {
-      return '';
-    }
-
-    if (field.errors['required']) {
-      return 'Ez a mező kötelező';
-    }
-    if (field.errors['minlength']) {
-      return `Minimum ${field.errors['minlength'].requiredLength} karakter szükséges`;
-    }
-    if (field.errors['maxlength']) {
-      return `Maximum ${field.errors['maxlength'].requiredLength} karakter engedélyezett`;
-    }
-
-    return '';
+  getControl(fieldName: string): FormControl {
+    return this.userForm.get(fieldName) as FormControl;
   }
 }

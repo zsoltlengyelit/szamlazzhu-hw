@@ -9,7 +9,6 @@ import { ButtonComponent } from '../../components/button/button.component';
   selector: 'app-user-list',
   imports: [CommonModule, ButtonComponent],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];

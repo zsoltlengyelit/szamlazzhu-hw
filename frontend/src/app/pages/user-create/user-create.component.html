@@ -1,4 +1,4 @@
-<div class="user-create-container">
+<div class="container">
   <div class="header">
     <h1>Új felhasználó létrehozása</h1>
   </div>
@@ -6,77 +6,45 @@
   <div class="form-container">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
-        <div class="form-group">
-          <label for="lastname">Vezetéknév *</label>
-          <input
-            id="lastname"
-            type="text"
-            formControlName="lastname"
-            [class.invalid]="isFieldInvalid('lastname')"
-          />
-          @if (isFieldInvalid('lastname')) {
-            <span class="error-message">
-              {{ getFieldError('lastname') }}
-            </span>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="firstname">Keresztnév *</label>
-          <input
-            id="firstname"
-            type="text"
-            formControlName="firstname"
-            [class.invalid]="isFieldInvalid('firstname')"
-          />
-          @if (isFieldInvalid('firstname')) {
-            <span class="error-message">
-              {{ getFieldError('firstname') }}
-            </span>
-          }
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="address">Cím</label>
-        <input
-          id="address"
+        <app-form-group
+          label="Vezetéknév"
+          inputId="lastname"
+          [control]="getControl('lastname')"
           type="text"
-          formControlName="address"
-          [class.invalid]="isFieldInvalid('address')"
-        />
-        @if (isFieldInvalid('address')) {
-          <span class="error-message">
-            {{ getFieldError('address') }}
-          </span>
-        }
-      </div>
+          [required]="true"
+        ></app-form-group>
 
-      <div class="form-group">
-        <label for="telephone">Telefon</label>
-        <input
-          id="telephone"
+        <app-form-group
+          label="Keresztnév"
+          inputId="firstname"
+          [control]="getControl('firstname')"
           type="text"
-          formControlName="telephone"
-          [class.invalid]="isFieldInvalid('telephone')"
-        />
-        @if (isFieldInvalid('telephone')) {
-          <span class="error-message">
-            {{ getFieldError('telephone') }}
-          </span>
-        }
+          [required]="true"
+        ></app-form-group>
       </div>
 
-      <div class="form-group">
-        <label for="job">Foglalkozás *</label>
-        <select id="job" formControlName="job">
-          @for (job of jobs; track job) {
-            <option [value]="job">
-              {{ jobLabels[job] }}
-            </option>
-          }
-        </select>
-      </div>
+      <app-form-group
+        label="Cím"
+        inputId="address"
+        [control]="getControl('address')"
+        type="text"
+      ></app-form-group>
+
+      <app-form-group
+        label="Telefon"
+        inputId="telephone"
+        [control]="getControl('telephone')"
+        type="text"
+      ></app-form-group>
+
+      <app-form-group
+        label="Foglalkozás"
+        inputId="job"
+        [control]="getControl('job')"
+        type="select"
+        [options]="jobOptions"
+        [required]="true"
+      ></app-form-group>
 
       <div class="form-actions">
         <app-button
