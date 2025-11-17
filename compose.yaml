@@ -1,0 +1,15 @@
+services:
+  backend:
+    image: zsoltlengyelit:szamlazzhu
+    networks:
+      - services
+
+  frontend:
+    image: zsoltlengyelit:szamlazzhu-web
+    ports:
+      - 4200:4200
+    networks:
+      - services
+
+networks:
+  services:

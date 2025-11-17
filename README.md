@@ -12,3 +12,8 @@ Frontend start:
 cd frontend
 npm start
 ```
+
+## Remote environment
+
+Backend: http://szamlazzhu.sherpas.hu
+Frontend: https://zsoltlengyelit.github.io/szamlazzhu-hw

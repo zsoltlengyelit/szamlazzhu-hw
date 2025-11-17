@@ -14,11 +14,12 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application
-FROM eclipse-temurin:25-jre
+FROM eclipse-temurin:25-jre-alpine
 
 WORKDIR /app
 
-ENV PORT $PORT
+ARG PORT
+ENV PORT=$PORT
 
 # Copy the built JAR from build stage
 COPY --from=build /app/target/users-*.jar app.jar
