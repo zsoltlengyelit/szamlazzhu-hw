@@ -1,5 +1,7 @@
 # Szamlazz.hu
 
+## [DEMO SITE](http://szamlazzhu.sherpas.hu:4200)
+
 ## Requirements:
 - [asdf](https://asdf-vm.com/)
 
