@@ -1,0 +1,90 @@
+<div class="user-list-container">
+  <div class="header">
+    <h1>Felhasználók</h1>
+    <app-button
+      label="Létrehozás"
+      variant="primary"
+      (clicked)="navigateToCreate()"
+    ></app-button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Betöltés...</div>
+  }
+
+  @if (!loading && users.length === 0) {
+    <div class="no-data">
+      Nincsenek felhasználók.
+    </div>
+  }
+
+  @if (!loading && users.length > 0) {
+    <div class="table-container">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Név</th>
+            <th>Foglalkozás</th>
+            <th>Aktív</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of paginatedUsers; track user.id) {
+            <tr>
+              <td>{{ getFullName(user) }}</td>
+              <td>{{ getJobLabel(user.job) }}</td>
+              <td>
+                <span class="status-badge" [class.active]="user.active">
+                  {{ user.active ? 'Igen' : 'Nem' }}
+                </span>
+              </td>
+              <td class="actions">
+                <app-button
+                  label="Módosítás"
+                  variant="secondary"
+                  (clicked)="navigateToEdit(user.id!)"
+                ></app-button>
+                <app-button
+                  label="Törlés"
+                  variant="danger"
+                  (clicked)="deleteUser(user)"
+                ></app-button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (totalPages > 1) {
+        <div class="pagination">
+          <button
+            class="page-btn"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)"
+          >
+            Előző
+          </button>
+
+          @for (page of getPaginationPages(); track page) {
+            <button
+              class="page-btn"
+              [class.active]="page === currentPage"
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          }
+
+          <button
+            class="page-btn"
+            [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)"
+          >
+            Következő
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>
