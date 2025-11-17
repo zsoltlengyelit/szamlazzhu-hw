@@ -1,15 +1,23 @@
 {
-  "name": "testing",
+  "name": "szamlazzhu-hw-e2e-tests",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "End-to-end tests for Számlázz.hu homework assignment using Playwright",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:list": "playwright test tests/user-list.spec.ts",
+    "test:create": "playwright test tests/user-create.spec.ts",
+    "test:edit": "playwright test tests/user-edit.spec.ts",
+    "test:validation": "playwright test tests/validation.spec.ts",
+    "test:pagination": "playwright test tests/pagination.spec.ts",
+    "test:integration": "playwright test tests/integration.spec.ts",
+    "report": "playwright show-report"
   },
-  "keywords": [],
+  "keywords": ["e2e", "testing", "playwright", "angular", "spring-boot"],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "playwright": "^1.56.1"

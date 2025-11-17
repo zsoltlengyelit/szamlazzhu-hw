@@ -18,11 +18,9 @@ FROM eclipse-temurin:25-jre
 
 WORKDIR /app
 
+ENV PORT $PORT
+
 # Copy the built JAR from build stage
 COPY --from=build /app/target/users-*.jar app.jar
-
-# Expose the default Spring Boot port
-EXPOSE 8080
-
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
