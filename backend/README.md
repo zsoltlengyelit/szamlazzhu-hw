@@ -189,6 +189,41 @@ Edit `src/main/resources/application.properties` to customize application settin
 java -jar target/users-0.0.1-SNAPSHOT.jar
 ```
 
+## Docker Deployment
+
+The backend includes a Dockerfile for containerized deployment using multi-stage build for optimal image size.
+
+### Building the Docker Image
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Build the Docker image
+docker build -t szamlazzhu-users:latest .
+```
+
+### Running with Docker
+
+```bash
+# Run the container (foreground)
+docker run -p 8080:8080 szamlazzhu-users:latest
+
+# Run the container (detached mode)
+docker run -d -p 8080:8080 --name users-app szamlazzhu-users:latest
+
+# View logs
+docker logs users-app
+
+# Stop the container
+docker stop users-app
+
+# Remove the container
+docker rm users-app
+```
+
+The application will be accessible at `http://localhost:8080` when the container is running.
+
 ## Troubleshooting
 
 ### Port 8080 already in use
